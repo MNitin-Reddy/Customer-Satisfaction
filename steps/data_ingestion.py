@@ -1,7 +1,7 @@
 import logging
 
 import pandas as pd 
-from zenml import steps
+from zenml import step
 
 
 class IngestData:
@@ -15,7 +15,7 @@ class IngestData:
 
             Args:
                 data_path: path to the data
-                
+
         """
         self.data_path = data_path
 
