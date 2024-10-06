@@ -4,6 +4,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from abc import ABC, abstractmethod
+from typing import Union
 
 
 import numpy as np 
@@ -29,13 +30,13 @@ class DataPreProcessing(DataStrategy):
     def handle_data(self, data: pd.DataFrame) -> pd.DataFrame:
 
         try:
-            data = data.drop([
-                 "order_approved_at",
+            data = data.drop(columns=[
+                    "order_approved_at",
                     "order_delivered_carrier_date",
                     "order_delivered_customer_date",
                     "order_estimated_delivery_date",
                     "order_purchase_timestamp",
-            ], axis = 1)
+            ])
 
             data["product_weight_g"].fillna(data["product_weight_g"].median(), inplace=True)
             data["product_length_cm"].fillna(data["product_length_cm"].median(), inplace=True)
@@ -67,7 +68,7 @@ class DataDivideStrategy(DataStrategy):
         Dividing data into test and train 
         """
         try:
-            X = data.drop(['reviews_score'], axis = 1)
+            X = data.drop(['review_score'], axis = 1)
             y = data["review_score"]
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.2, random_state=42

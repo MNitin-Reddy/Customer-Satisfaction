@@ -43,7 +43,7 @@ class RMSE(Evaluation):
             logging.info("Calculating MSE")
             rmse = mean_squared_error(y_true,y_pred,squared=False)
             logging.info(f"RMSE: {rmse}")
-            return mse
+            return rmse
         except Exception as e:
             logging.error(f"Error in calculating RMSE: {e}")
             raise e

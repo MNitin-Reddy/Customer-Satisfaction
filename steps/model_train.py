@@ -8,7 +8,7 @@ import logging
 import pandas as pd
 
 from sklearn.base import RegressorMixin
-from .config import ModelNameConfig
+from steps.config import ModelNameConfig
 
 from zenml import step
 

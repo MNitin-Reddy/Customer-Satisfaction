@@ -30,5 +30,7 @@ def data_clean(df: pd.DataFrame) -> Tuple[
 
         logging.info('Data cleaning completed')
 
+        return X_train, X_test, y_train,y_test
+
     except Exception as e:
         raise e
