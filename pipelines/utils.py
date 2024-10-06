@@ -1,0 +1,23 @@
+import logging
+
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+
+import pandas as pd
+from src.data_cleaning import DataCleaning, DataPreProcessing
+
+
+def get_data_for_test():
+    try:
+        df = pd.read_csv("./data/olist_customers_dataset.csv")
+        df = df.sample(n=100)
+        preprocess_strategy = DataPreProcessing()
+        data_cleaning = DataCleaning(df, preprocess_strategy)
+        df = data_cleaning.handle_data()
+        df.drop(["review_score"], axis=1, inplace=True)
+        result = df.to_json(orient="split")
+        return result
+    except Exception as e:
+        logging.error(e)
+        raise e
